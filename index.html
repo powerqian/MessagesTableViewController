@@ -29,17 +29,11 @@
       <section>
         <p><a href="http://travis-ci.org/jessesquires/MessagesTableViewController"><img src="https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png" alt="Build Status"></a></p>
 
-<p>This messages tableview controller is very similar to the one in the iOS Messages app. <strong>Note, this is only a messaging UI, not a messaging app.</strong> This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.</p>
+<p><code>JSMessagesViewController</code> is a <code>UITableViewController</code> subclass that is very similar to the iOS Messages app. <strong>Note, this is only a messaging UI, not a messaging app.</strong></p>
 
 <p><img src="https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot0.png" alt="Messages Screenshot 1"></p>
 
-<p><strong>See more <a href="https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots">screenshots</a> in the <code>Screenshots/</code> directory. (Surprise!)</strong></p>
-
-<h2>
-<a name="update" class="anchor" href="#update"><span class="octicon octicon-link"></span></a>Update!</h2>
-
-<h4>
-<a name="version-300-just-released-with-a-brand-new-api-ios-7-support--documentation-coming-soon" class="anchor" href="#version-300-just-released-with-a-brand-new-api-ios-7-support--documentation-coming-soon"><span class="octicon octicon-link"></span></a>Version 3.0.0 just released with a brand new API! iOS 7 support + documentation coming soon!</h4>
+<p><em>See more <a href="https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots">screenshots</a> in the <code>Screenshots/</code> directory.</em></p>
 
 <h2>
 <a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
@@ -70,28 +64,26 @@
 </ul><h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<h3>
+<h4>
 <a name="from-cocoapods" class="anchor" href="#from-cocoapods"><span class="octicon octicon-link"></span></a>From <a href="http://www.cocoapods.org">CocoaPods</a>
-</h3>
+</h4>
 
 <pre><code>pod 'JSMessagesViewController'
 </code></pre>
 
-<h3>
-<a name="from-source" class="anchor" href="#from-source"><span class="octicon octicon-link"></span></a>From source</h3>
+<h4>
+<a name="from-source" class="anchor" href="#from-source"><span class="octicon octicon-link"></span></a>From source</h4>
 
 <ul>
 <li>Drag the <code>JSMessagesViewController/</code> folder to your project.</li>
 <li>Add the <code>AudioToolbox.framework</code> to your project, if you want to use the sound effects</li>
 </ul><h2>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How To Use</h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<h3>
-<a name="subclass-jsmessagesviewcontroller" class="anchor" href="#subclass-jsmessagesviewcontroller"><span class="octicon octicon-link"></span></a>Subclass <code>JSMessagesViewController</code>
-</h3>
-
-<ul>
-<li>In <code>- (void)viewDidLoad</code>
+<ol>
+<li><p>Subclass <code>JSMessagesViewController</code></p></li>
+<li>
+<p>In <code>- (void)viewDidLoad</code></p>
 
 <ul>
 <li>Set your view controller as the <code>delegate</code> and <code>datasource</code>
@@ -100,159 +92,53 @@
 </li>
 </ul>
 </li>
-</ul><h3>
-<a name="implement-the-jsmessagesviewdelegate-protocol" class="anchor" href="#implement-the-jsmessagesviewdelegate-protocol"><span class="octicon octicon-link"></span></a>Implement the <code>JSMessagesViewDelegate</code> protocol</h3>
+<li><p>Implement the <code>JSMessagesViewDelegate</code> protocol</p></li>
+<li><p>Implement the <code>JSMessagesViewDataSource</code> protocol</p></li>
+<li><p>Implement <code>- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section</code> from the <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html"><code>UITableViewDataSource</code> protocol</a>.</p></li>
+<li><p>Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the <code>rootViewController</code> of a <code>UINavigationController</code>.</p></li>
+<li><p>Read the documentation (Yes, there's documentation! <a href="http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif">Seriously</a>!)</p></li>
+<li><p>See the included demo project: <code>JSMessagesDemo.xcodeproj</code></p></li>
+</ol><h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
-<div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didSendText:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">text</span><span class="p">;</span>
-</pre></div>
+<p>Documentation is <a href="http://cocoadocs.org/docsets/JSMessagesViewController">available here</a> via <a href="http://cocoadocs.org">CocoaDocs</a>. Thanks <a href="https://twitter.com/CocoaDocs">@CocoaDocs</a>!</p>
 
-<ul>
-<li>Hook into your own backend here</li>
-<li>Call <code>finishSend</code> at the end of this method to animate and reset the text input view</li>
-<li>Call <code>scrollToBottomAnimated:</code> to scroll to newly sent message</li>
-<li>Optionally play sound effects
+<h2>
+<a name="customization" class="anchor" href="#customization"><span class="octicon octicon-link"></span></a>Customization</h2>
 
-<ul>
-<li>For outgoing messages <code>[JSMessageSoundEffect playMessageSentSound]</code>
-</li>
-<li>For incoming messages <code>[JSMessageSoundEffect playMessageReceivedSound]</code>
-</li>
-</ul>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">JSBubbleMessageType</span><span class="p">)</span><span class="nf">messageTypeForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span><span class="p">;</span>
-</pre></div>
+<p><em>Stuff here coming soon!</em></p>
 
-<ul>
-<li>The type of bubble for this row, options are:
+<h2>
+<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How To Contribute</h2>
 
-<ul>
-<li><code>JSBubbleMessageTypeIncoming</code></li>
-<li><code>JSBubbleMessageTypeOutgoing</code></li>
-</ul>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">UIImageView</span> <span class="o">*</span><span class="p">)</span><span class="nf">bubbleImageViewWithType:</span><span class="p">(</span><span class="n">JSBubbleMessageType</span><span class="p">)</span><span class="nv">type</span>
-                       <span class="nl">forRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span><span class="p">;</span>
-</pre></div>
+<p><em>Stuff here coming soon!</em></p>
 
-<ul>
-<li>The <a href="https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots">bubble image view</a> for this row, see <code>JSBubbleImageViewFactory</code>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">JSMessagesViewTimestampPolicy</span><span class="p">)</span><span class="nf">timestampPolicy</span>
-</pre></div>
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
 
-<ul>
-<li>How/when to display timestamps for messages:
+<p>Created by <a href="https://twitter.com/jesse_squires">Jesse Squires</a>, a <a href="http://programming-motherfucker.com">programming-motherfucker</a>.</p>
 
-<ul>
-<li><code>JSMessagesViewTimestampPolicyAll</code></li>
-<li><code>JSMessagesViewTimestampPolicyAlternating</code></li>
-<li><code>JSMessagesViewTimestampPolicyEveryThree</code></li>
-<li><code>JSMessagesViewTimestampPolicyEveryFive</code></li>
-<li><code>JSMessagesViewTimestampPolicyCustom</code></li>
-</ul>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">JSMessagesViewAvatarPolicy</span><span class="p">)</span><span class="nf">avatarPolicy</span>
-</pre></div>
+<p>Originally inspired by <a href="http://github.com/soffes">@soffes</a> <strong>/</strong> <a href="https://github.com/soffes/ssmessagesviewcontroller">SSMessagingViewController</a>.</p>
 
-<ul>
-<li>How/when to display avatars:
+<p>Many thanks to <a href="https://github.com/jessesquires/MessagesTableViewController/graphs/contributors">the contributors</a> of this project.</p>
 
-<ul>
-<li><code>JSMessagesViewAvatarPolicyAll</code></li>
-<li><code>JSMessagesViewAvatarPolicyIncomingOnly</code></li>
-<li><code>JSMessagesViewAvatarPolicyOutgoingOnly</code></li>
-<li><code>JSMessagesViewAvatarPolicyNone</code></li>
-</ul>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">JSMessagesViewSubtitlePolicy</span><span class="p">)</span><span class="nf">subtitlePolicy</span><span class="p">;</span>
-</pre></div>
+<p>Square message bubbles designed by <a href="http://www.twitter.com/michaelschultz">@michaelschultz</a>.</p>
 
-<ul>
-<li>How/when to display subtitles:
-
-<ul>
-<li><code>JSMessagesViewSubtitlePolicyAll</code></li>
-<li><code>JSMessagesViewSubtitlePolicyIncomingOnly</code></li>
-<li><code>JSMessagesViewSubtitlePolicyOutgoingOnly</code></li>
-<li><code>JSMessagesViewSubtitlePolicyNone</code></li>
-</ul>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">hasTimestampForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</pre></div>
-
-<ul>
-<li>
-<em>Optional</em> Returns if this row should display a timestamp or not</li>
-<li>Required if using <code>JSMessagesViewTimestampPolicyCustom</code>
-</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">shouldPreventScrollToBottomWhileUserScrolling</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li>
-<em>Optional</em> Return <code>YES</code> if you would like to prevent the tableview from being scrolled to the bottom while the user is scrolling the tableview manually. The method <code>scrollToRowAtIndexPath:indexPath:atScrollPosition:animated:</code> can also be used to implement scrolling functionality that respects this setting.</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendButtonForInputView</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li>
-<em>Optional</em> Return a custom send button, the frame is set for you.</li>
-</ul><h3>
-<a name="implement-the-jsmessagesviewdatasource-protocol" class="anchor" href="#implement-the-jsmessagesviewdatasource-protocol"><span class="octicon octicon-link"></span></a>Implement the <code>JSMessagesViewDataSource</code> protocol</h3>
-
-<div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">textForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</pre></div>
-
-<ul>
-<li>The text to be displayed for this row</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="nf">timestampForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</pre></div>
-
-<ul>
-<li>The timestamp to be displayed <em>above</em> this row</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">UIImageView</span> <span class="o">*</span><span class="p">)</span><span class="nf">avatarImageViewForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</pre></div>
-
-<ul>
-<li>The avatar image view to be displayed this row</li>
-</ul><div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">subtitleForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
-</pre></div>
-
-<ul>
-<li>The subtitle text to be displayed <em>below</em> this row</li>
-</ul><h3>
-<a name="implement-the-table-view-data-source-method" class="anchor" href="#implement-the-table-view-data-source-method"><span class="octicon octicon-link"></span></a>Implement the <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UITableViewDataSource">table view data source</a> method</h3>
-
-<div class="highlight highlight-objective-c"><pre><span class="k">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">section</span>
-</pre></div>
-
-<h3>
-<a name="customize" class="anchor" href="#customize"><span class="octicon octicon-link"></span></a>Customize</h3>
-
-<ul>
-<li>For custom background color, use <code>- (void)setBackgroundColor:(UIColor *)color</code>
-</li>
-</ul><h3>
-<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h3>
-
-<ul>
-<li>You may present view programmatically, or use Storyboards</li>
-<li>Your <code>JSMessagesViewController</code> subclass <strong>must</strong> be presented in a <code>UINavigationController</code>
-</li>
-<li>Demo project included: <code>MessagesDemo.xcodeproj</code> </li>
-</ul><h2>
+<h2>
 <a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
 
-<p>This project was originally based on work by <a href="http://github.com/soffes">@soffes</a> <a href="https://github.com/soffes/ssmessagesviewcontroller">SSMessagingViewController</a>. </p>
+<p>I initialily developed this control to use in <a href="http://www.hemoglobe.com">Hemoglobe</a> for private messages between users.</p>
 
-<p>I developed this to use in <a href="http://www.hemoglobe.com">Hemoglobe</a> for private messages between users.</p>
+<p>As it turns out, messaging is a popular thing that iOS devs want to do — I know, this is <em>shocking</em>. Thus, I am supporting this project in my free time and have added features way beyond what <a href="http://www.hemoglobe.com">Hemoglobe</a> ever needed.</p>
 
-<p><a href="https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot4.png">Square message bubbles</a> designed by <a href="http://www.twitter.com/michaelschultz">@michaelschultz</a>.</p>
+<p>Check me out my work at <a href="http://www.hexedbits.com">Hexed Bits</a>.</p>
 
 <h2>
 <a name="apps-using-this-control" class="anchor" href="#apps-using-this-control"><span class="octicon octicon-link"></span></a>Apps Using This Control</h2>
 
 <p><a href="http://bit.ly/hemoglobeapp">Hemoglobe</a></p>
+
+<p><a href="https://github.com/tochman/OxwallMessenger">Oxwall Messenger</a></p>
 
 <p><a href="https://itunes.apple.com/us/app/fourchat/id650833730?mt=8">FourChat</a></p>
 
@@ -273,7 +159,7 @@
 <a name="mit-license" class="anchor" href="#mit-license"><span class="octicon octicon-link"></span></a><a href="http://opensource.org/licenses/MIT">MIT License</a>
 </h2>
 
-<p>You are free to use this as you please. No attribution necessary. <strong>However, a link back to <a href="http://www.hexedbits.com">Hexed Bits</a> or here would be appreciated. If you use this, please tell me about it!</strong></p>
+<p>You are free to use this as you please. <strong>No attribution necessary, but much appreciated.</strong></p>
 
 <p>Copyright © 2013 Jesse Squires</p>
 
