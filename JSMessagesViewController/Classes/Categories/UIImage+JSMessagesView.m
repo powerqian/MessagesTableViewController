@@ -25,8 +25,12 @@
 
 - (UIImage *)js_stretchableImageWithCapInsets:(UIEdgeInsets)capInsets
 {
-    return [self resizableImageWithCapInsets:capInsets
-                                resizingMode:UIImageResizingModeStretch];
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"6.0" options:NSNumericSearch] == NSOrderedDescending) {
+        return [self resizableImageWithCapInsets:capInsets
+                                    resizingMode:UIImageResizingModeStretch];
+    } else {
+        return [self resizableImageWithCapInsets:capInsets];
+    }
 }
 
 - (UIImage *)js_imageAsCircle:(BOOL)clipToCircle
