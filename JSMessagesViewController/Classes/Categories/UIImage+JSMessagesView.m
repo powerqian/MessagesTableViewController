@@ -25,7 +25,7 @@
 
 - (UIImage *)js_stretchableImageWithCapInsets:(UIEdgeInsets)capInsets
 {
-    if ([[[UIDevice currentDevice] systemVersion] compare:@"6.0" options:NSNumericSearch] == NSOrderedDescending) {
+    if ([self respondsToSelector:@selector(resizableImageWithCapInsets:resizingMode:)]) {
         return [self resizableImageWithCapInsets:capInsets
                                     resizingMode:UIImageResizingModeStretch];
     } else {
